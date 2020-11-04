@@ -4,11 +4,14 @@
 #' @param Your_Data The data for the individuals of interest, in Life History data-format
 #' @param Full_Data The data for the full known population in the study area, in Life History data-format
 #' @return Dataframe of individuals from Your_Data who have known grandmothers
-#' @example HasGrandma(LifeHistory_Babies, LifeHistory)
+#' @example HasGrandma(Your_Data, Full_Data)
 #' @export
 
 HasGrandma = function(Your_Data, Full_Data)
 {
+  require(magrittr)
+  require(dplyr)
+  
   Your_Data = Your_Data %>% filter(!is.na(MotherID)) #ones who have mothers
   GrandmaOrNo = integer(nrow(Your_Data))
   for(i in 1:nrow(Your_Data))
@@ -28,5 +31,3 @@ HasGrandma = function(Your_Data, Full_Data)
   Your_Data$GrandmaOrNo = NULL #delete the yes/no column
   return(Your_Data)
 }
-
-#requires dplyr, magrittr

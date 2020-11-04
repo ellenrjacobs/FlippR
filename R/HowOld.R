@@ -5,7 +5,7 @@
 #' @param Your_Dates A vector of dates the same length as Your_Data, where each value corresponds to one row of Your_Data
 #' @param Age Specify whether you want the output ages in "Days" (age in days) or "Years" (age in years). Default is Days.
 #' @return Vector of each individual's ages, where each value corresponds to one row of Your_Data
-#' @example HowOld(LifeHistory_Babies, TodaysDate, Age = "Years")
+#' @example HowOld(Your_Data, Your_Dates, Age = "Years")
 #' @export
 
 
@@ -30,8 +30,12 @@ HowOld = function(Your_Data, Your_Dates, Age = "Days")
     Ages = Ages/365 #turn into years
     return(Ages)
   }
-  else #the user stuck with default or defined days
+  else if(Age == "Days") #the user stuck with default, defined in days
   {
     return(Ages)
+  }
+  else
+  {
+    print("ERROR-- choose years or days")
   }
 }
