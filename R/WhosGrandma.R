@@ -5,6 +5,7 @@
 #' @param Full_Data The data for the full known population in the study area, in Life History data-format
 #' @return A dataframe in Life History data-format of the life history data of the grandmothers of input individuals
 #' @example MyData = HasGrandma(Your_Data, Full_Data), WhosGrandma(MyData, Full_Data)
+#' @export
 
 WhosGrandma = function(Your_Data, Full_Data)
 {
