@@ -19,3 +19,6 @@ Vector of each individual's ages, where each value corresponds to one row of You
 \description{
 Calculates the age that each dolphin in a dataframe is at the date supplied in a corresponding vector of dates.
 }
+\examples{
+HowOld(Your_Data, Your_Dates, Age = "Years")
+}

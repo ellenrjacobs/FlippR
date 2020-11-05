@@ -17,3 +17,7 @@ A dataframe in Life History data-format of the life history data of the grandmot
 \description{
 Identify the grandmother of each individual of interest and return her life history information. Should be run only after HasGrandma to ensure all individuals do have grandmothers in the population first.
 }
+\examples{
+MyData = HasGrandma(Your_Data, Full_Data) 
+WhosGrandma(MyData, Full_Data)
+}

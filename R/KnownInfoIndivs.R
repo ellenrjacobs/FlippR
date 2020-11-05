@@ -3,7 +3,7 @@
 #' Filter individuals to include only those for whom there is a known mother, sex, and birth date
 #' @param Your_Data The data for the individuals of interest, in Life History data-format
 #' @return Dataframe of individuals from Your_Data who have a known mother, sex, and birth date
-#' @example KnownInfoIndivs(Your_Data)
+#' @examples KnownInfoIndivs(Your_Data)
 #' @export
 
 KnownInfoIndivs = function(Your_Data)

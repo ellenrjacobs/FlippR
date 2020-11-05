@@ -15,3 +15,6 @@ Dataframe of individuals from Your_Data who have a known mother, sex, and birth 
 \description{
 Filter individuals to include only those for whom there is a known mother, sex, and birth date
 }
+\examples{
+KnownInfoIndivs(Your_Data)
+}

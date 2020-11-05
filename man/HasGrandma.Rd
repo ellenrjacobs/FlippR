@@ -17,3 +17,6 @@ Dataframe of individuals from Your_Data who have known grandmothers
 \description{
 Filter individuals to include only those who have grandmothers for which there exists life history information in the larger population's dataset.
 }
+\examples{
+HasGrandma(Your_Data, Full_Data)
+}

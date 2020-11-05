@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 library(FlippR)
 library(magrittr)
 library(dplyr)
-#load("data/ExampleData.Rdata") #will this work if it's from github?
+library(lubridate)
 ```
 
 ## Introduction

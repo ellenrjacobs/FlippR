@@ -3,3 +3,4 @@
 export(HasGrandma)
 export(HowOld)
 export(KnownInfoIndivs)
+export(WhosGrandma)

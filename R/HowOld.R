@@ -5,7 +5,7 @@
 #' @param Your_Dates A vector of dates the same length as Your_Data, where each value corresponds to one row of Your_Data
 #' @param Age Specify whether you want the output ages in "Days" (age in days) or "Years" (age in years). Default is Days.
 #' @return Vector of each individual's ages, where each value corresponds to one row of Your_Data
-#' @example HowOld(Your_Data, Your_Dates, Age = "Years")
+#' @examples HowOld(Your_Data, Your_Dates, Age = "Years")
 #' @export
 
 
