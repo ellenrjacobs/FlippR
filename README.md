@@ -11,12 +11,12 @@ The FlippR package is designed to work with life history data from long term ani
 You can install the released version of FlippR from GitHub at the url: https://github.com/erj22/FlippR
 
 ``` r
-install.packages("FlippR")
+devtools::install_github("erj22/FlippR")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to use KnownInfoIndivs, a function within FlippR that filters observations for individuals with enough known demographic information for basic analyses.
 
 ``` r
 library(FlippR)
