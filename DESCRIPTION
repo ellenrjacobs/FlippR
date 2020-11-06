@@ -1,13 +1,13 @@
 Package: FlippR
-Title: What the Package Does (One Line, Title Case)
+Title: Analyze Life History Data
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Ellen",
+           family = "Jacobs",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "erj22@georgetown.edu",
+           comment = c(ORCID = "0000-0003-2957-3286"))
+Description: The FlippR package is designed to work with life history data from long term animal research projects, modeled using life history data from the Shark Bay Dolphin Project's database of dolphin demographic data. FlippR allows the user to do simple data manipulation on data in the "life history data format". The functions contained within the package help filter individuals, determine generational relationships, and calculate age on specific observation dates.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to
     pick a license
 Encoding: UTF-8

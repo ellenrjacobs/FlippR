@@ -19,24 +19,23 @@ knitr::opts_chunk$set(
 library(FlippR)
 library(magrittr)
 library(dplyr)
-library(lubridate)
 ```
 
 ## Introduction
 
-The FlippR package is designed to work with life history data from long term animal researc projects, modeled using life history data from the Shark Bay Dolphin Project's database of dolphin demographic data. FlippR allows the user to do simple data manipulation on data in the "life history data format". For the purposes of this package, life history data format means that data to be manipulated contains the following columns and data types:
+The FlippR package is designed to work with life history data from long term animal research projects, modeled using life history data from the Shark Bay Dolphin Project's database of dolphin demographic data. FlippR allows the user to do simple data manipulation on data in the "life history data format". For the purposes of this package, life history data format means that data to be manipulated contains the following columns and data types:
 
 ```{r}
 knitr::kable(Your_Data) #our example dataset
 ```
 
-IndividualID should contain character data with the identifier for the individual that a row's life history data corresponds to. In the case of the example dataset, this is a 3-letter code which is unique to the individual. MotherID should contain character data with the identifier for the individual's mother. For best functioning, every mother mentioned in the MotherID column should also have their own IndividualID row, but some functions in the package can still be run without that being true. The Sex column in this dataset is not mandatory for proper "life history data format" as none of the packages currently utilize sex information; rather, this column illustrates that there can be more columns than just the 4 required for the package that will be manipulated along with the columns of interest. BirthDate should contain the date of birth in date format of the individual in that row's IndividualID and DeathDate should contain the date of death in date format of the same individual. For all columns, missing data should be filled with NA values, including the DeathDate of individuals in the population who are still presumed alive.
+IndividualID should contain character data with the identifier for the individual that a row's life history data corresponds to. In the case of the example dataset, this is a 3-letter code which is unique to the individual. MotherID should contain character data with the identifier for the individual's mother. For best functioning, every mother mentioned in the MotherID column should also have their own IndividualID row, but some functions in the package can still be run without that being true. The Sex column should contain character information with the individual's sex, either "MALE," "FEMALE," or "UNKNOWN." BirthDate should contain the date of birth in date format of the individual in that row's IndividualID and DeathDate should contain the date of death in date format of the same individual. For all columns, missing data should be filled with NA values, including the DeathDate of individuals in the population who are still presumed alive. There can be more columns than just the 5 required for the package that will be manipulated along with the columns of interest.
 
-The packages that are required to run FlippR are dplyr and magrittr, and the package lubridate is required to run this vignette.
+The packages that are required to run FlippR are dplyr and magrittr.
 
 ## KnownInfoIndivs
 
-The KnownInfoIndivs function is a sort of complete cases for demographic information pertinent to many analyses of life history data. Many long term animal research projects collect information on many individuals for whom full demographic data is not known, such as dolphin calves who died before sex could be determined or individuals who were adults at the time of the project's beginning and so for whom a birth date is not know. In some analyses, the inclusion of these individuals is problematic. KnownInfoIndivs filters life history data to only include individuals who we know the most important demographic information about: who their mother is, what their sex is, and when they were born. KnownInfoIndivs only requires the single dataset of individuals as input and returns the same dataset with only the individuals who fit the criteria.
+The KnownInfoIndivs function is a sort of complete cases for demographic information pertinent to many analyses of life history data. Many long term animal research projects collect information on many individuals for whom full demographic data is not known, such as dolphin calves who died before sex could be determined or individuals who were adults at the time of the project's beginning and so for whom a birth date is not know. In some analyses, the inclusion of these individuals is problematic. KnownInfoIndivs filters life history data to only include individuals who we know the most important demographic information about: who their mother is, what their sex is, and when they were born. KnownInfoIndivs only requires the single dataset of individuals of interest as input and returns the same dataset with only the individuals who fit the criteria.
 
 In the following example, we will take our initial dataframe and run it through KnownInfoIndivs to remove all individuals about whom there is too much unknown information for the sake of our analyses.
 
@@ -52,7 +51,7 @@ Here we see that individual PIP was eliminated because we don't know who her mot
 
 ## HasGrandma
 
-The HasGrandma function is the first of a two function "Grandma suite" to identify which individuals in a population have grandmothers in the population, and later, who those grandmothers are. Finding grandmothers could be useful in, for example, studying maternal effects or constructing pedigrees of the individuals in the population. HasGrandma takes as input the same kind of life history data format dataframe containing the individuals of interest, and also requires the full life history data for the population (ex. which has not been filtered to remove individuals with incomplete data) in the same data format, in order to determine the generational relationships of the individuals of interest. HasGrandma will return the dataframe back with only the individuals who have a grandmother with her own life history data entry in the data. Importantly, this function only works with complete life history data for the population where there is a life history entry for every mother. If an individual has a mother who does not have her own entry, the function will fail.
+The HasGrandma function is the first of a two function "Grandma suite" to identify which individuals in a population have grandmothers in the population, and later, who those grandmothers are. Finding grandmothers could be useful in, for example, studying maternal effects or constructing pedigrees of the individuals in the population. HasGrandma takes as input the same kind of life history data format dataframe containing the individuals of interest, and also requires the full life history data for the population (ex. which has not been filtered to remove individuals with incomplete data) in the same data format, in order to determine the generational relationships of the individuals of interest. HasGrandma will return the dataframe of individuals of interest back with only the individuals who have a grandmother with her own life history data entry in the data. Importantly, this function only works with complete life history data for the population where there is a life history entry for every mother. If an individual has a mother who does not have her own entry, the function will fail.
 
 In this example, we will take our data filtered from the previous step and enter it into HasGrandma along with our full dataset which has not been filtered.
 
@@ -72,7 +71,7 @@ Now that we've determined the subset of individuals who do have known grandmothe
 
 The WhosGrandma function is designed as the second function of the "Grandma suite". WhosGrandma will only work without throwing an error if a) HasGrandma has already run on the dataset or b) every individual of interest has a known grandmother. HasGrandma is not included within the WhosGrandma function because if an individual was eliminated due to not having a known grandma, the output of WhosGrandma would be a different length than the input data and it would not be possible to match up grandmothers with their grandchildren row-wise, as is possible when the input data contains only individuals with grandmothers.
 
-WhosGrandma takes the life history data format dataframe of individuals as well as the full life history for the population and locates the life history data for the grandmothers of the individuals of interest in the full life history dataset and returns the life history data entries for those grandmothers. In this example, we will take our filtered data output from HasGrandma and put it into WhosGrandma to identify who the grandmothers of those individuals are.
+WhosGrandma takes the life history data format dataframe of individuals of interest with grandmothers as well as the full life history for the population and locates the life history data for the grandmothers of the individuals of interest in the full life history dataset and returns the life history data entries for those grandmothers. In this example, we will take our filtered data output from HasGrandma and put it into WhosGrandma to identify who the grandmothers of those individuals are.
 
 ```{r}
 knitr::kable(Your_Data.WithGrandma) #the individuals of interest
@@ -91,8 +90,8 @@ Sometimes it might be useful to know how old an individual was on a certain date
 In this example we will calculate the age of each individual on a specific observation date.
 
 ```{r}
-Your_Dates = mdy(c("2-3-2016","4-15-2005","12-24-2019","4-11-2020","10-6-2012","11-1-2020","8-23-2009","11-1-2020")) #our example observation dates
-print(Your_Dates)
+knitr::kable(Your_Data) #original data for reference
+print(Your_Dates) #our example observation dates
 
 Your_Ages = HowOld(Your_Data, Your_Dates, Age = "Years")
 
